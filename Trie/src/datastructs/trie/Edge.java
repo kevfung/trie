@@ -1,5 +1,19 @@
 package datastructs.trie;
 
+/**
+ * Represents an edge in a Trie. It connects a parent {@link Node} to a child {@link Node}.
+ * It also contains a single character that is appended to the parent node's word
+ * to get the word found in the child node.
+ * 
+ * <br/><br/>
+ * Example:
+ * 		Apple (parent) --s-->  Apples (child)
+ * <br/>
+ *      where --s--> represents the edge
+ * 
+ * @author Kevin
+ *
+ */
 public class Edge {
 	String character;
 	Node parent;

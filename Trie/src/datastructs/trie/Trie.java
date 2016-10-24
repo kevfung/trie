@@ -6,9 +6,24 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * A Trie is a data structure used to create a dictionary of words. You can add
+ * words to the Trie, which will build a set of nodes and edges to represent the
+ * word. The idea is that with enough words in the Trie, it will act as a dictionary.
+ * You can then provide a letter and the Trie can give you all possible next characters
+ * to form possible words found in the dictionary
+ * 
+ * @author Kevin
+ *
+ */
 public class Trie {
 	Map<String, Node> rootNodes = new HashMap<>(26);
 	
+	/**
+	 * Add a word to the Trie dictionary
+	 * 
+	 * @param word
+	 */
 	public void addWord(String word) {
 		if (word == null || word.length() == 0) 
 			return;
@@ -74,7 +89,8 @@ public class Trie {
 	/**
 	 * Gets the root node that represents this character.
 	 * If it cannot find it, it creates a new node and
-	 * adds it to the map of root nodes.
+	 * adds it to the map of root nodes. Intended to be used
+	 * when adding a word to the Trie.
 	 * 
 	 * @param firstChar
 	 * @return {@link Node}
@@ -90,18 +106,31 @@ public class Trie {
 		}
 	}
 	
-	public void walkTrie() {
+	/**
+	 * Walk through the Trie depth-first and
+	 * prints out all the nodes and edges in the Trie.
+	 */
+	public void walkTriePrint() {
 		Set<String> keys = rootNodes.keySet();
 		for (String key : keys) {
 			Node rootNode = rootNodes.get(key);
 			
 			System.out.println(rootNode.word);			
-			walkTriePrint(rootNode, 1);
+			walkTriePrintHelper(rootNode, 1);
 			System.out.println("");
 		}
 	}
 	
-	private void walkTriePrint(Node node, int depth) {	
+	/**
+	 * Helper method for walking the Trie depth-first and
+	 * printing out each node and edge. Recursively goes 
+	 * through the node and its edges to print out their
+	 * values.
+	 * 
+	 * @param node is the node and its edges to print
+	 * @param depth is a integer representing how deep we are in the Trie. Used for printing spaces.
+	 */
+	private void walkTriePrintHelper(Node node, int depth) {	
 		if (node ==  null)
 			return;		
 		
@@ -113,13 +142,13 @@ public class Trie {
 		for (Edge edge : edges) {
 			System.out.println("|" + new String(new char[depth]).replace("\0", "-") + edge.character);
 			Node child = edge.getChild();
-			walkTriePrint(child, depth + 1);
+			walkTriePrintHelper(child, depth + 1);
 		}
 	}
 	
 	/**
 	 * Given a word, this returns a Set of all possible
-	 * next characters based on this  Trie
+	 * next characters based on this Trie
 	 * 
 	 * @param word to find possible next characters for
 	 * @return Set<String> of all possible next characters
@@ -148,6 +177,15 @@ public class Trie {
 		return null;
 	}
 	
+	/**
+	 * Helper method in finding the set of all possible next
+	 * characters. It recursively searches the Trie by traversing
+	 * nodes and edges to find a match for the given word.
+	 * 
+	 * @param node
+	 * @param word
+	 * @return
+	 */
 	private Set<String> walkTrieFind(Node node, String word) {
 		if (node ==  null)
 			return null;			

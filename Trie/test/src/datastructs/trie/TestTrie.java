@@ -9,7 +9,7 @@ import org.junit.Test;
 public class TestTrie {
 
 	@Test
-	public void test_walkTrie() {
+	public void test_walkTriePrint() {
 		Trie trie = new Trie();
 		
 		trie.addWord("Apple");	
@@ -19,7 +19,7 @@ public class TestTrie {
 		trie.addWord("Blue");
 		trie.addWord("Black");
 		trie.addWord("Block");
-		trie.walkTrie();
+		trie.walkTriePrint();
 	}
 
 	@Test
@@ -35,9 +35,11 @@ public class TestTrie {
 		trie.addWord("Blast");
 		trie.addWord("Black");		
 		
+		// Find the possible characters that come next when given "Ab"
 		Set<String> nextChars = trie.findNextChar("Ab");
 		assertTrue("Expected to find letter 's' as next char", nextChars.contains("s"));
 		
+		// Find the possible characters that come next when given "App".
 		nextChars = trie.findNextChar("App");
 		assertTrue("Expected to find letter 'l' as next char", nextChars.contains("l"));
 		assertTrue("Expected to find letter 'e' as next char", nextChars.contains("l"));

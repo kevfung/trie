@@ -49,10 +49,10 @@ public class TestNode {
 	}
 	
 	@Test
-	public void test_NodeEdgesStoredInOrder() {
+	public void test_NodeEdgesStoredInNaturalOrder() {
 		Node parent = new Node("A");
 		
-		// add edges out of alphabetical order to test if the edges will be stored in order
+		// add edges out of alphabetical order to test if the edges will be stored in alphabetical order
 		parent.addEdge(new Edge(parent, new Node("Aa")));
 		parent.addEdge(new Edge(parent, new Node("Az")));
 		parent.addEdge(new Edge(parent, new Node("Ac")));
@@ -63,6 +63,7 @@ public class TestNode {
 		Map<String, Edge> edgeMap = parent.getEdges();
 		Set<Entry<String, Edge>> edgeSet = edgeMap.entrySet();
 		String parentEdgeChar= null;
+		
 		for(Entry<String, Edge> edgeEntry : edgeSet) {
 			if (parentEdgeChar == null) {
 				parentEdgeChar = edgeEntry.getKey();
