@@ -3,6 +3,7 @@ package datastructs.trie;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -17,6 +18,8 @@ import java.util.TreeSet;
  *
  */
 public class Trie {
+	// Stores a mapping between an alphabetical letter the
+	// dictionary of words that start with that letter
 	Map<String, Node> rootNodes = new HashMap<>(26);
 	
 	/**
@@ -107,13 +110,13 @@ public class Trie {
 	}
 	
 	/**
-	 * Walk through the Trie depth-first and
+	 * For each Trie, walk through the Trie depth-first and
 	 * prints out all the nodes and edges in the Trie.
 	 */
 	public void walkTriePrint() {
-		Set<String> keys = rootNodes.keySet();
-		for (String key : keys) {
-			Node rootNode = rootNodes.get(key);
+		Set<Entry<String, Node>> rootNodeSet = rootNodes.entrySet();
+		for (Entry<String, Node> rootNodeEntry : rootNodeSet) {
+			Node rootNode = rootNodeEntry.getValue();
 			
 			System.out.println(rootNode.word);			
 			walkTriePrintHelper(rootNode, 1);
